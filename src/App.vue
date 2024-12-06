@@ -6,9 +6,9 @@
         </h1>
 
         <Category 
-          v-for="(category, idx) in categories"
+          v-for="(category) in categories"
           :category="category"
-          @add="(category) => addChildCategory(category, idx)"
+          @add="addChildCategory"
         />
     </div>
 </template>
@@ -24,7 +24,7 @@ const categories = ref([
     { id: 3, name: 'cat3', child: []},
 ])
 
-const addChildCategory = (category, idx) => {
-    categories.value[idx].child.push(category)
+const addChildCategory = (category) => {
+  category.parentCategory.child.push(category)
 }
 </script>

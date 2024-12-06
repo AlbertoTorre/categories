@@ -6,7 +6,7 @@
         <Category 
             v-for="category in category.child" 
             :category="category"
-            @add="addChildCategory"
+            @add="(child, parentCategory) => addChildCategory(child, parentCategory)"
         />
     </div>
 </template>
@@ -19,10 +19,11 @@ const emit = defineEmits(['add'])
 const add = () => {
     const order = category.child.length + 1
 
-    emit('add', { name: 'child-'+ order, child: []} )
+    emit('add', { name: 'child-'+ order, child: [], parentCategory: category })
 }
 
-const addChildCategory = (category) => {
-    emit('add', category)
+const addChildCategory = (child, parentCategory) => {
+
+    emit('add', child, parentCategory)
 }
 </script>
